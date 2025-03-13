@@ -5,7 +5,7 @@ import Container from "./container/Container";
 import Logo from "./Logo";
 import LogoutBtn from "./Header/Logoutbtn";
 import RTE from "./RTE";
-import Signup from "./Signup";
+import Signup from "./signup.jsx";
 import Login from "./Login";
 import Button from "./Button";
 import PostForm from "./post-form/PostForm";
