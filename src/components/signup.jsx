@@ -1,22 +1,22 @@
 "use client"
 
 import { useState } from "react"
-import authService from "../appwrite/auth"
 import { Link, useNavigate } from "react-router-dom"
 import { login } from "../store/authSlice"
 import { Button, Input, Logo } from "./index.js"
 import { useDispatch } from "react-redux"
 import { useForm } from "react-hook-form"
+import authService from "../appwrite/auth"
 
 function Signup() {
   const navigate = useNavigate()
-  const [error, setError] = useState("")
   const dispatch = useDispatch()
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm()
+  const [error, setError] = useState("")
 
   const create = async (data) => {
     setError("")
@@ -33,7 +33,7 @@ function Signup() {
   }
 
   return (
-    <div className="flex items-center justify-center w-full min-h-[calc(100vh-200px)] bg-gradient-to-b from-blue-900 to-gray-900 py-10">
+    <div className="flex items-center justify-center w-full min-h-screen bg-gradient-to-b from-blue-900 to-gray-900">
       <div
         className={`mx-auto w-full max-w-lg bg-gray-800/90 backdrop-blur-sm rounded-xl p-10 border border-blue-700/50 shadow-xl`}
       >
@@ -42,7 +42,7 @@ function Signup() {
             <Logo width="100%" />
           </span>
         </div>
-        <h2 className="text-center text-2xl font-bold leading-tight text-white mb-2">Create your account</h2>
+        <h2 className="text-center text-2xl font-bold leading-tight text-white mb-2">Welcome</h2>
         <p className="mt-2 text-center text-base text-gray-300 mb-8">
           Already have an account?&nbsp;
           <Link
@@ -57,8 +57,7 @@ function Signup() {
             <p className="text-red-500 text-center font-medium">{error}</p>
           </div>
         )}
-
-        <form onSubmit={handleSubmit(create)}>
+        <form onSubmit={handleSubmit(create)} className="mt-8">
           <div className="space-y-5">
             <div>
               <Input
@@ -113,10 +112,10 @@ function Signup() {
               {isSubmitting ? (
                 <div className="flex items-center justify-center">
                   <div className="h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
-                  Creating account...
+                  Signing up...
                 </div>
               ) : (
-                "Create Account"
+                "Sign up"
               )}
             </Button>
           </div>
