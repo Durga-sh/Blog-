@@ -23,7 +23,8 @@ export default function PostForm({ post }) {
     console.log("Form data:", data);
     try {
       if (post) {
-        const file = data.image[0]
+        // Update existing post
+        const file = data.image && data.image[0]
           ? await appwriteService.uploadFile(data.image[0])
           : null;
 
@@ -40,19 +41,24 @@ export default function PostForm({ post }) {
           navigate(`/post/${dbPost.$id}`);
         }
       } else {
-        const file = await appwriteService.uploadFile(data.image[0]);
+        // Create new post
+        if (data.image && data.image[0]) {
+          const file = await appwriteService.uploadFile(data.image[0]);
 
-        if (file) {
-          const fileId = file.$id;
-          data.featuredImage = fileId;
-          const dbPost = await appwriteService.createPost({
-            ...data,
-            userId: userData.$id,
-          });
+          if (file) {
+            const fileId = file.$id;
+            data.featuredImage = fileId;
+            const dbPost = await appwriteService.createPost({
+              ...data,
+              userId: userData.$id,
+            });
 
-          if (dbPost) {
-            navigate(`/post/${dbPost.$id}`);
+            if (dbPost) {
+              navigate(`/post/${dbPost.$id}`);
+            }
           }
+        } else {
+          console.error("No image file selected");
         }
       }
     } catch (error) {
@@ -141,7 +147,7 @@ export default function PostForm({ post }) {
                   <img
                     src={appwriteService.getFilePreview(post.featuredImage)}
                     alt={post.title}
-                    className="w-full h-auto rounded-lg transition-transform duration-300 hover:scale-105"
+                    className="w-full h-48 object-cover rounded-lg transition-transform duration-300 hover:scale-105"
                   />
                 </div>
               )}

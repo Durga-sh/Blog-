@@ -17,18 +17,26 @@ function Login() {
     formState: { errors, isSubmitting },
   } = useForm()
   const [error, setError] = useState("")
+  const [success, setSuccess] = useState("") // New state for success message
 
   const login = async (data) => {
     setError("")
+    setSuccess("")
     try {
       const session = await authService.login(data)
       if (session) {
         const userData = await authService.getCurrentUser()
-        if (userData) dispatch(authLogin(userData))
-        navigate("/")
+        if (userData) {
+          dispatch(authLogin(userData))
+          setSuccess("Login successful! Redirecting to All Posts...")
+          // Delay navigation to show success message
+          setTimeout(() => {
+            navigate("/all-posts")
+          }, 1500) // 1.5 seconds delay
+        }
       }
     } catch (error) {
-      setError(error.message)
+      setError(error.message || "An error occurred during login")
     }
   }
 
@@ -55,6 +63,11 @@ function Login() {
         {error && (
           <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4 mb-6">
             <p className="text-red-500 text-center font-medium">{error}</p>
+          </div>
+        )}
+        {success && (
+          <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 mb-6">
+            <p className="text-green-500 text-center font-medium">{success}</p>
           </div>
         )}
         <form onSubmit={handleSubmit(login)} className="mt-8">
@@ -105,6 +118,14 @@ function Login() {
             </Button>
           </div>
         </form>
+        <p className="mt-4 text-center text-sm text-gray-400">
+          <Link
+            to="/forgot-password"
+            className="text-blue-500 hover:text-blue-400 hover:underline"
+          >
+            Forgot Password?
+          </Link>
+        </p>
       </div>
     </div>
   )

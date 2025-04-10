@@ -46,7 +46,7 @@ function Header() {
       <div className='max-w-7xl mx-auto px-4 w-full'>
         <nav className='flex items-center justify-between'>
           <div>
-            <Link to='/' className="flex items-center">
+            <Link to='/public/edu.png' className="flex items-center">
               <Logo width='100px' />
             </Link>
           </div>
