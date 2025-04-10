@@ -33,7 +33,7 @@ export default function Post() {
     };
 
     return post ? (
-        <div className="w-full min-h-[calc(100vh-200px)] bg-gray-900 text-white py-8">
+        <div className="w-full flex-1 flex flex-col bg-gray-900 text-white py-8">
             <Container>
                 <div className="w-full flex justify-center mb-8 relative rounded-xl overflow-hidden shadow-xl">
                     <img

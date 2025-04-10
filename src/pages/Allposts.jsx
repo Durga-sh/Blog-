@@ -25,19 +25,19 @@ function AllPosts() {
   }, [])
 
   return (
-    <div className="w-full min-h-[calc(100vh-200px)] bg-gradient-to-b from-gray-900 to-gray-800 text-white py-10">
+    <div className="w-full flex-1 flex flex-col bg-gradient-to-b from-gray-900 to-gray-800 text-white py-10">
       <Container>
         <h1 className="text-3xl font-bold mb-8 text-center">All Posts</h1>
 
         {loading ? (
-          <div className="flex items-center justify-center py-20">
+          <div className="flex-1 flex items-center justify-center py-20">
             <div className="animate-pulse flex flex-col items-center">
               <div className="h-12 w-12 rounded-full border-4 border-t-blue-500 border-r-transparent border-b-blue-500 border-l-transparent animate-spin"></div>
               <p className="mt-4 text-blue-400">Loading posts...</p>
             </div>
           </div>
         ) : posts.length === 0 ? (
-          <div className="text-center py-20">
+          <div className="flex-1 text-center py-20">
             <p className="text-xl text-gray-300">No posts found</p>
             <button
               onClick={() => (window.location.href = "/add-post")}

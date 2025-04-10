@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {Container, PostForm} from '../components'
 import appwriteService from "../appwrite/config";
-import { useNavigate,  useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function EditPost() {
     const [post, setPosts] = useState(null)
@@ -20,7 +20,7 @@ function EditPost() {
         }
     }, [slug, navigate])
   return post ? (
-    <div className='py-8'>
+    <div className='w-full flex-1 flex flex-col bg-gradient-to-b from-gray-900 to-gray-800 text-white py-8'>
         <Container>
             <PostForm post={post} />
         </Container>

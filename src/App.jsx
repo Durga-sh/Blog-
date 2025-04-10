@@ -23,12 +23,21 @@ function App() {
   }, [dispatch]);
 
   return !loading ? (
-    <div className="min-h-screen flex flex-col w-full bg-gray-400">
-      <Header />
-      <main className="flex-1 w-full">
+    <div className="min-h-screen flex flex-col w-screen bg-gray-400">
+      {/* Header stays at top */}
+      <header className="shrink-0">
+        <Header />
+      </header>
+
+      {/* Main content takes available space */}
+      <main className="flex-1 w-full overflow-auto">
         <Outlet />
       </main>
-      <Footer />
+
+      {/* Footer stays at bottom */}
+      <footer className="shrink-0">
+        <Footer />
+      </footer>
     </div>
   ) : null;
 }

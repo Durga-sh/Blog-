@@ -33,7 +33,7 @@ function Signup() {
   }
 
   return (
-    <div className="flex items-center justify-center w-full min-h-screen bg-gradient-to-b from-blue-900 to-gray-900">
+    <div className="flex items-center justify-center w-full flex-1 bg-gradient-to-b from-blue-900 to-gray-900 py-10">
       <div
         className={`mx-auto w-full max-w-lg bg-gray-800/90 backdrop-blur-sm rounded-xl p-10 border border-blue-700/50 shadow-xl`}
       >
