@@ -12,7 +12,7 @@ class AppwriteService {
     this.bucket = new Storage(this.client);
   }
 
-  async createPost({ title, slug, content, featuredImage, status, userId }) {
+  async createPost({ title,  content, featuredImage, status, userId }) {
     if (!featuredImage) {
         throw new Error("Missing required attribute: featuredImage");
       }
