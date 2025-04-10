@@ -1,6 +1,6 @@
 import React from 'react'
 import { Login  } from '../components'
-function Login() {
+function login() {
   return (
     <div className='py-8'>
        <Login/>
@@ -8,4 +8,4 @@ function Login() {
   )
 }
 
-export default Login
+export default login

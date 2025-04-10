@@ -1,39 +1,68 @@
 import React, { useEffect, useState } from 'react';
 import appwriteService from "../appwrite/config";
-import { Container, PostCard } from '../components';
+import { PostCard } from '../components';
+import { Container } from '../components';
 
 function Home() {
     const [posts, setPosts] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        setLoading(true);
         appwriteService.getPosts().then((posts) => {
             if (posts) {
                 setPosts(posts.documents);
             }
+            setLoading(false);
+        }).catch(error => {
+            console.error("Error fetching posts:", error);
+            setLoading(false);
         });
     }, []);
 
-    if (posts.length === 0) {
-        return (
-            <div className="w-full min-h-[calc(100vh-200px)] flex items-center justify-center bg-gray-900 text-white">
-                <h1 className="text-2xl font-bold text-center">
-                    Login to read posts
-                </h1>
-            </div>
-        );
-    }
-
     return (
-        <div className="w-full min-h-[calc(100vh-200px)] bg-gray-900 text-white">
-            <div className="w-full max-w-7xl mx-auto px-4">
-                <div className="flex flex-wrap">
-                    {posts.map((post) => (
-                        <div key={post.$id} className="p-2 w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
-                            <PostCard {...post} className="bg-white text-gray-900" />
+        <div className="min-h-screen w-full flex flex-col bg-gradient-to-b from-gray-900 to-gray-800 text-white">
+            <Container>
+                {loading ? (
+                    <div className="flex-grow flex items-center justify-center py-20">
+                        <div className="animate-pulse flex flex-col items-center">
+                            <div className="h-12 w-12 rounded-full border-4 border-t-blue-500 border-r-transparent border-b-blue-500 border-l-transparent animate-spin"></div>
+                            <p className="mt-4 text-blue-400">Loading posts...</p>
                         </div>
-                    ))}
-                </div>
-            </div>
+                    </div>
+                ) : posts.length === 0 ? (
+                    <div className="flex-grow flex flex-col items-center justify-center py-20">
+                        <h1 className="text-3xl font-bold text-center mb-4">
+                            Welcome to the Blog
+                        </h1>
+                        <p className="text-xl text-gray-300 mb-8 text-center max-w-md">
+                            Sign in to view and create amazing posts
+                        </p>
+                        <button 
+                            onClick={() => window.location.href = '/login'}
+                            className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-full transition-all duration-300 font-medium"
+                        >
+                            Login to continue
+                        </button>
+                    </div>
+                ) : (
+                    <div className="flex-grow w-full py-8">
+                        <h1 className="text-3xl font-bold mb-8 text-center">Latest Posts</h1>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                            {posts.map((post) => (
+                                <div
+                                    key={post.$id}
+                                    className="w-full"
+                                >
+                                    <PostCard
+                                        {...post}
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                )}
+            </Container>
         </div>
     );
 }

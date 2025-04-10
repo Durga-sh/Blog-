@@ -1,10 +1,17 @@
-import React from 'react'
-import { PostForm } from '../components'
+import { PostForm } from "../components"
+import { Container } from "../components"
 
 function AddPost() {
   return (
-    <div className='w-full min-h-[calc(100vh-200px)]'>
-      <PostForm />
+    <div className="w-full min-h-[calc(100vh-200px)] bg-gradient-to-b from-gray-900 to-gray-800 text-white py-10">
+      <Container>
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-3xl font-bold mb-8 text-center">Create New Post</h1>
+          <div className="bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-700">
+            <PostForm />
+          </div>
+        </div>
+      </Container>
     </div>
   )
 }
