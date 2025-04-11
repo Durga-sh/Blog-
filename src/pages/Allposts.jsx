@@ -54,6 +54,10 @@ function AllPosts() {
           </div>
         )}
       </Container>
+      
+      {/* Added proper spacing and divider line */}
+      <div className="mt-20"></div>
+      <div className="w-full h-px bg-gray-600"></div>
     </div>
   )
 }
